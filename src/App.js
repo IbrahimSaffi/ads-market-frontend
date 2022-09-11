@@ -6,13 +6,11 @@ import AdPage from './components/AdPage';
 import LoginPage from './components/LoginPage';
 import AuthPage from './components/AuthPage';
 import SignUpPage from './components/SignUpPage';
-import UserPage from './components/UserPage';
-import Settings from './components/Settings';
 import Profile from './components/Profile';
 import PostAd from './components/PostAd';
 import AdsPage from './components/AdsPage';
 import { useDispatch,useSelector } from 'react-redux';
-import apiSlice, { getAds, viewProfile } from './slices/apiSlice';
+import apiSlice, { getAds } from './slices/apiSlice';
 import axiosClient from './apiConfig';
 
 //Chrome will prevent cross origin request so install cors package
@@ -21,25 +19,22 @@ export default function App() {
   let dispatch = useDispatch(apiSlice)
   let goTo = useNavigate()
   useEffect(()=>{
-    if(apiState.currPage===""){
-     async function getData(){
-        let res = await axiosClient.get("/ad")
-        //  let resData = await res.json()
-         console.log(res)
-      }
-      getData()
-
-      // dispatch(getAds())
-    }
+    // if(apiState.currPage===""){
+    //  async function getData(){
+    //     let res = await axiosClient.get("/ad")
+    //     //  let resData = await res.json()
+    //      console.log(res)
+    //   }
+    //   getData()
+    //   // dispatch(getAds())
+    // }
     // else{
     //   console.log(apiState.currAd._id,`${apiState.currPage}/${apiState.currAd._id}`)
     //   goTo(`${apiState.currPage}/${apiState.currAd._id}`)
     // }
     // goTo(apiState.currPage)
   },[apiState.currPage])
-  useEffect(()=>{
-      dispatch(viewProfile())
-  },[apiState.user])
+
   return (
     
     <div>
@@ -52,9 +47,7 @@ export default function App() {
          </Route>
         <Route path='post-ad' element={<PostAd/>}/>
         <Route path='profile' element={<Profile/>}/>
-        <Route path='settings' element={<Settings/>}/>
         <Route path='ad/:id' element={<AdPage/>}/>
-        <Route path='user/:id' element={<UserPage/>}/>
         </Routes>
     </div>
   )

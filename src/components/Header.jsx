@@ -1,16 +1,18 @@
 import React from 'react'
 import { useDispatch,useSelector } from 'react-redux';
 import apiSlice, { changePage } from '../slices/apiSlice';
+import {Routes,Route,useNavigate} from 'react-router-dom';
 
 export default function Header() {
-  let dispatch = useDispatch(apiSlice)    
+  // let dispatch = useDispatch(apiSlice)   
+   let goTo = useNavigate()
   return (
     <div>
     <h1>Drag Marketplace</h1>
     <div>
-        <button onClick={()=>dispatch(changePage("login"))}>Login</button>
+        <button onClick={()=>goTo("/auth/login")}>Login</button>
         <div></div>
-        <button onClick={()=>dispatch(changePage("signup"))}>Sign-Up</button>
+        <button onClick={()=>goTo("/auth/signup")}>Sign-Up</button>
         
         <div className='sandwich' ></div>
     </div>

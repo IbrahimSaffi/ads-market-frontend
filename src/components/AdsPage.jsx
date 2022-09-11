@@ -7,19 +7,22 @@ import {Routes,Route,useNavigate} from 'react-router-dom';
 
 export default function AdsPage() {
   let goTo = useNavigate()
-  let apiState = useSelector(state=>state.apiSlice)
   let state = useSelector(state=>state.apiSlice)
+  let dispatch = useDispatch(apiSlice)
+  useEffect(()=>{
+     dispatch(getAds(state.accessToken))
+  },[])
   return (
     <div>
        <button onClick={()=>{
-        if(apiState.user===null){
+        if(state.user===null){
           goTo("auth/login")
         }
         else{
-          goTo("auth/post-ad")
+          goTo("/post-ad")
         }
        }} >Post new ad</button>
-       {apiState.ads.map((ele,i)=><AdCard adIndex={i} key={i} />)}
+       {state.ads.map((ele,i)=><AdCard adIndex={i} key={i} />)}
     </div>
   )
 }

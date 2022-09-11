@@ -7,7 +7,11 @@ import { useDispatch } from 'react-redux';
 export default function SignUpPage() {
   let dispatch = useDispatch(apiSlice)
   const SignupSchema = Yup.object().shape({
-    userName: Yup.string()
+    firstName: Yup.string()
+      .min(3, 'Too Short!')
+      .max(50, 'Too Long!')
+      .required('Required'),
+    lastName: Yup.string()
       .min(3, 'Too Short!')
       .max(50, 'Too Long!')
       .required('Required'),
@@ -29,8 +33,9 @@ export default function SignUpPage() {
       validationSchema={SignupSchema}
       onSubmit={
         values => {
-          console.log("here")
-          dispatch(createAccount(values))}
+          let name = values.firstName + " " + values.lastName
+          dispatch(createAccount({name:name,password:values.password,email:values.email,confirmPassword:values.passwordCheck}))
+        }
       }
     >
       {({ errors, touched }) => (
@@ -58,7 +63,7 @@ export default function SignUpPage() {
           {errors.passwordCheck && touched.passwordCheck ? (
             <div>{errors.passwordCheck}</div>
           ) : null}
-          <button type='submit' >Create Account</button>
+          <button type='submit' onClick={() => console.log("clicked")}>Create Account</button>
         </Form>
       )}
     </Formik></div>
