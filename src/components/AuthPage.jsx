@@ -3,7 +3,7 @@ import {Outlet} from 'react-router-dom';
 
 export default function AuthPage() {
   return (
-    <div>Auth
+    <div>
       <Outlet/>
     </div>
 

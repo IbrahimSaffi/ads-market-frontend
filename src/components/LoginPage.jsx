@@ -1,5 +1,8 @@
 
 import * as React from 'react';
+import { useDispatch,useSelector } from 'react-redux';
+import apiSlice, { getAds, login } from '../slices/apiSlice';
+import {Routes,Route,useNavigate} from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,35 +13,32 @@ import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const theme = createTheme();
 
-export default function SignInSide() {
+export default function LoginPage() {
+  let dispatch = useDispatch(apiSlice)
+  let state = useSelector(state=>state.apiSlice)
+  let goTo = useNavigate()
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+    try {
+      const data = new FormData(event.currentTarget);
+      dispatch(login({
+        email: data.get('email'),
+        password: data.get('password'),
+      }))
+      dispatch(getAds(state.accessToken))
+      goTo("/")
+    }
+    catch (e) {
 
+    }
+    // console.log(event.currentTarget)
+  };
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
@@ -67,9 +67,9 @@ export default function SignInSide() {
               alignItems: 'center',
             }}
           >
-            {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />
-            </Avatar> */}
+            </Avatar>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
@@ -107,18 +107,18 @@ export default function SignInSide() {
                 Sign In
               </Button>
               <Grid container>
-                <Grid item xs>
+                {/* <Grid item xs>
                   <Link href="#" variant="body2">
                     Forgot password?
                   </Link>
-                </Grid>
-                <Grid item>
+                </Grid> */}
+                {/* <Grid item>
                   <Link href="#" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
-                </Grid>
+                </Grid> */}
               </Grid>
-              <Copyright sx={{ mt: 5 }} />
+              {/* <Copyright sx={{ mt: 5 }} /> */}
             </Box>
           </Box>
         </Grid>
@@ -126,12 +126,6 @@ export default function SignInSide() {
     </ThemeProvider>
   );
 }
-// import React from 'react'
-// import { Formik, Form, Field } from 'formik';
-// import * as Yup from 'yup';
-// import { useDispatch } from 'react-redux';
-// import apiSlice, { login } from '../slices/apiSlice';
-// import {Routes,Route,useNavigate} from 'react-router-dom';
 
 // export default function LoginPage() {
 //   let dispatch = useDispatch(apiSlice)
@@ -152,7 +146,7 @@ export default function SignInSide() {
 //            try{
 //              dispatch(login(values))
 //              goTo("/")
-//            }  
+//            }
 //            catch(e){
 
 //            }

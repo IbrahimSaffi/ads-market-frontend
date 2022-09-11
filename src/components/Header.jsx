@@ -1,21 +1,31 @@
 import React from 'react'
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import apiSlice, { changePage } from '../slices/apiSlice';
-import {Routes,Route,useNavigate} from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import { AppBar, Button, createTheme, CssBaseline, ThemeProvider, Toolbar, Typography } from '@mui/material';
 
 export default function Header() {
   // let dispatch = useDispatch(apiSlice)   
-   let goTo = useNavigate()
+  let state = useSelector(state=>state.apiSlice)
+  let goTo = useNavigate()
+  const theme = createTheme();
   return (
-    <div>
-    <h1>Drag Marketplace</h1>
-    <div>
-        <button onClick={()=>goTo("/auth/login")}>Login</button>
-        <div></div>
-        <button onClick={()=>goTo("/auth/signup")}>Sign-Up</button>
-        
-        <div className='sandwich' ></div>
-    </div>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AppBar position="relative">
+        <Toolbar style={{display:"flex",justifyContent:"space-between"}} >
+          <Typography variant="h6" color="inherit" noWrap>
+            Drag Marketplace
+          </Typography>
+          {state.profile===null?<div>
+            <Button style={{color:"white",outlineColor:"white"}}variant="outlined" onClick={() => goTo("/auth/login")}>Login</Button>
+            <Button style={{color:"white",outlineColor:"white"  }} variant="outlined" onClick={() => goTo("/auth/signup")}>Sign-Up</Button>
+          </div>:<div>
+            <Button style={{color:"white",outlineColor:"white"}}variant="outlined" onClick={() => goTo("/auth/login")}>Logout</Button>
+            <Button style={{color:"white",outlineColor:"white"  }} variant="outlined" onClick={() => goTo("/profile")}>View Profile</Button>
+          </div>}
+        </Toolbar>
+      </AppBar>
+    </ThemeProvider>
   )
 }
