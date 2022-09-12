@@ -139,7 +139,11 @@ let mainSlice = createSlice({
     reducers: {
        setProfileAds(state,action){
           state.ads = state.profile.ads
-       }
+       },
+       reset(state,action){
+        state.loading=false
+        state.error=null
+     }
     },
     extraReducers: (builder) => {
         //Getting all Ads
@@ -243,5 +247,5 @@ let mainSlice = createSlice({
         })
     }
 })
-export const { setProfileAds} = mainSlice.actions
+export const { setProfileAds,reset} = mainSlice.actions
 export default mainSlice.reducer

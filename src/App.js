@@ -10,7 +10,7 @@ import Profile from './components/Profile';
 import PostAd from './components/PostAd';
 import AdsPage from './components/AdsPage';
 import { useDispatch,useSelector } from 'react-redux';
-import apiSlice, { getAds } from './slices/apiSlice';
+import apiSlice, { getAds, reset } from './slices/apiSlice';
 import Loading from './components/Loading';
 
 export default function App() {
@@ -19,6 +19,7 @@ export default function App() {
   let goTo = useNavigate()
 
   useEffect(()=>{
+    dispatch(reset())
     if(apiState.accessToken===null){
       goTo("auth/login")
     }
