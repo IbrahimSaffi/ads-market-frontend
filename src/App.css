@@ -1,0 +1,25 @@
+.post-ad{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.post-ad *{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+button{
+    background-color: #1976D2;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    padding: 10px;
+}
+option{
+    text-transform: capitalize;
+}

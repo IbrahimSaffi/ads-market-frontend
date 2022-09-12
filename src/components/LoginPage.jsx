@@ -2,14 +2,13 @@
 import * as React from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import apiSlice, { getAds, login } from '../slices/apiSlice';
-import {Routes,Route,useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -23,21 +22,20 @@ export default function LoginPage() {
   let dispatch = useDispatch(apiSlice)
   let state = useSelector(state=>state.apiSlice)
   let goTo = useNavigate()
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const data = new FormData(event.currentTarget);
-      dispatch(login({
+       dispatch(login({
         email: data.get('email'),
         password: data.get('password'),
       }))
-      dispatch(getAds(state.accessToken))
-      goTo("/")
+       dispatch(getAds(state.accessToken))
+     goTo("/")
     }
     catch (e) {
 
     }
-    // console.log(event.currentTarget)
   };
   return (
     <ThemeProvider theme={theme}>
@@ -107,18 +105,8 @@ export default function LoginPage() {
                 Sign In
               </Button>
               <Grid container>
-                {/* <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid> */}
-                {/* <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid> */}
+              
               </Grid>
-              {/* <Copyright sx={{ mt: 5 }} /> */}
             </Box>
           </Box>
         </Grid>
@@ -127,46 +115,3 @@ export default function LoginPage() {
   );
 }
 
-// export default function LoginPage() {
-//   let dispatch = useDispatch(apiSlice)
-// let goTo = useNavigate()
-//   const LoginSchema = Yup.object().shape({
-//     email: Yup.string().email('Invalid email').required('Required'),
-//     password: Yup.string().min(6, "Password should be atleast 6 letter long").required('Password is required'),
-// });
-//   return (
-//     <div> <Formik
-//     initialValues={{
-//         email: '',
-//         password: '',
-//     }}
-//     validationSchema={LoginSchema}
-//     onSubmit={
-//         values=>{
-//            try{
-//              dispatch(login(values))
-//              goTo("/")
-//            }
-//            catch(e){
-
-//            }
-//         }
-
-//             }
-//             >
-//     {({ errors, touched }) => (
-//         <Form>
-//             <div>Enter Email</div>
-//             <Field name="email" type="email" />
-//             {errors.email && touched.email ? <div>{errors.email}</div> : null}
-//             <div>Enter Password</div>
-//             <Field name="password" type="password" />
-//             {errors.password && touched.password ? (
-//                 <div>{errors.password}</div>
-//                 ) : null}
-//             <button type='submit' >Login</button>
-//         </Form>
-//     )}
-// </Formik></div>
-//   )
-// }

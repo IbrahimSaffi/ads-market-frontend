@@ -1,11 +1,10 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import apiSlice, { changePage } from '../slices/apiSlice';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import {  useNavigate } from 'react-router-dom';
 import { AppBar, Button, createTheme, CssBaseline, ThemeProvider, Toolbar, Typography } from '@mui/material';
 
 export default function Header() {
-  // let dispatch = useDispatch(apiSlice)   
   let state = useSelector(state=>state.apiSlice)
   let goTo = useNavigate()
   const theme = createTheme();

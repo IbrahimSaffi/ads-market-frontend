@@ -9,7 +9,6 @@ import { useEffect } from 'react';
 export default function PostAd() {
     let img = useRef(null)
     let option = useRef(null)
-    //start here
 
     let dispatch = useDispatch(apiSlice)
     let apiState = useSelector(state => state.apiSlice)
@@ -22,7 +21,7 @@ export default function PostAd() {
      dispatch(getCategories())
     },[])
     return (
-        <div>
+        <div className='post-ad' >
             <Formik
                 initialValues={{
                     title: '',
@@ -61,14 +60,14 @@ export default function PostAd() {
                         <div>Price</div>
                         <Field name="price" />
                         {errors.price && touched.price ? <div>{errors.price}</div> : null}
-                        <div>category</div>
-                        <input ref={img} type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
+                        <div>Category</div>
                         <select ref={option} name="categories" id="categories">
                             {apiState.categories.map(ele=>{
-                               return <option value={ele.name}>{ele.name}</option>
-
+                                return <option value={ele.name}>{ele.name}</option>
+                                
                             })}
                         </select>
+                            <input ref={img} type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
                         <button className='signup-btn' type='submit' >Post Ad</button>
                     </Form>
                 )}

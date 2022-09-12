@@ -37,16 +37,7 @@ export default function Profile() {
   return (
     <ThemeProvider theme={theme}>
     <CssBaseline />
-    {/* <AppBar position="relative">
-      <Toolbar>
-        <CameraIcon sx={{ mr: 2 }} />
-        <Typography variant="h6" color="inherit" noWrap>
-          Album layout
-        </Typography>
-      </Toolbar>
-    </AppBar> */}
-    <main>
-      {/* Hero unit */}
+
       <Box
         sx={{
           bgcolor: 'background.paper',
@@ -64,20 +55,7 @@ export default function Profile() {
           >
            Your Ads
           </Typography>
-          {/* <Typography variant="h5" align="center" color="text.secondary" paragraph>
-            Something short and leading about the collection below—its contents,
-            the creator, etc. Make it short and sweet, but not too short so folks
-            don&apos;t simply skip over it entirely.
-          </Typography> */}
-          {/* <Stack
-            sx={{ pt: 4 }}
-            direction="row"
-            spacing={2}
-            justifyContent="center"
-          >
-            <Button variant="contained">Main call to action</Button>
-            <Button variant="outlined">Secondary action</Button>
-          </Stack> */}
+       
         </Container>
       </Box>
       <Container sx={{ py: 8 }} maxWidth="md">
@@ -90,9 +68,7 @@ export default function Profile() {
               >
                 <CardMedia
                   component="img"
-                  // sx={{
-                  //   pt: '9%',
-                  // }}
+           
                   image={ad.img === "No Image" ? "../../images/NoImage.jpg" : ad.img}
                   alt="random"
                 />
@@ -105,10 +81,7 @@ export default function Profile() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  {/* <Button onClick={() => {
-                    goTo(`ad/${state.ads[i]._id}`)
-                  }} size="small">View</Button> */}
-                  {/* <Button size="small">Edit</Button> */}
+                 
                 </CardActions>
               </Card>
             </Grid>
@@ -123,23 +96,6 @@ export default function Profile() {
       }
      }} >Post new ad</Button>
       </Container>
-    </main>
-    {/* Footer */}
-    {/* <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
-      <Typography variant="h6" align="center" gutterBottom>
-        Footer
-      </Typography>
-      <Typography
-        variant="subtitle1"
-        align="center"
-        color="text.secondary"
-        component="p"
-      >
-        Something here to give the footer a purpose!
-      </Typography>
-       <Copyright /> 
-    </Box> */}
-    {/* End footer */}
   </ThemeProvider>
 );
 }
