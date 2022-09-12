@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 export default function PostAd() {
     let img = useRef(null)
     let option = useRef(null)
-
+    let [file,setFile] = useState(null)
     let dispatch = useDispatch(apiSlice)
     let apiState = useSelector(state => state.apiSlice)
     const PostSchema = Yup.object().shape({
@@ -37,6 +37,8 @@ export default function PostAd() {
                         }
                         console.log(apiState)
                         formData.append("seller", apiState.profile._id)
+                        formData.append("img",file)
+                        console.log(img.current)
                         let category = apiState.categories.find(ele=>{
                             return ele.name===option.current.value})
                         formData.append("category",category._id)
@@ -67,7 +69,7 @@ export default function PostAd() {
                                 
                             })}
                         </select>
-                            <input ref={img} type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
+                            <input onChange={(e)=>setFile(e.target.files[0])} type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
                         <button className='signup-btn' type='submit' >Post Ad</button>
                     </Form>
                 )}
