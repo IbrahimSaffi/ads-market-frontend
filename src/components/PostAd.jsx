@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import apiSlice, { getCategories, postAd } from '../slices/apiSlice';
+import apiSlice, { getCategories, postAd, reset } from '../slices/apiSlice';
 import { useEffect } from 'react';
 
 
@@ -19,6 +19,7 @@ export default function PostAd() {
     });
     useEffect(()=>{
      dispatch(getCategories())
+     dispatch(reset())
     },[])
     return (
         <div className='post-ad' >
@@ -74,6 +75,7 @@ export default function PostAd() {
                     </Form>
                 )}
             </Formik>
+            <div>{apiState.error}</div>
         </div>
 
     )

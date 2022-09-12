@@ -181,20 +181,16 @@ let mainSlice = createSlice({
         //Post Ad
         builder.addCase(postAd.pending, (state, action) => {
             state.loading=true
-
         })
         builder.addCase(postAd.rejected, (state, action) => {
           console.log(action.error.message)
           state.error = action.error.message
-          setTimeout(()=>{
-            state.error=null
-           },2000)
           state.loading=false
 
         })
         builder.addCase(postAd.fulfilled, (state, action) => {
             state.adAdded = true
-            state.loading=true
+            state.loading=false
         })
         // Signup
         builder.addCase(createAccount.pending, (state, action) => {
