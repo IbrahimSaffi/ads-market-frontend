@@ -21,7 +21,7 @@ export default function Header() {
             <Button style={{color:"white",outlineColor:"white"  }} variant="outlined" onClick={() => goTo("/auth/signup")}>Sign-Up</Button>
           </div>:<div>
             <Button style={{color:"white",outlineColor:"white"}}variant="outlined" onClick={() => goTo("/auth/login")}>Logout</Button>
-            <Button style={{color:"white",outlineColor:"white"  }} variant="outlined" onClick={() => goTo("/profile")}>View Profile</Button>
+            {/* <Button style={{color:"white",outlineColor:"white"  }} variant="outlined" onClick={() => goTo("/profile")}>View Profile</Button> */}
           </div>}
         </Toolbar>
       </AppBar>
