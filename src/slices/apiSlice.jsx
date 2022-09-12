@@ -4,7 +4,7 @@ export const getAds = createAsyncThunk(
     "ads / list",
     async (token) => {
         console.log(token)
-        let res = await fetch("http://localhost:8000/ads",{
+        let res = await fetch("https://marketbazar-backend.herokuapp.com/ads",{
             method:"GET",
             headers:{
                 Authorization:"Bearer " + token
@@ -26,7 +26,7 @@ export const viewAd = createAsyncThunk(
         const state = getState(); 
 
         console.log(id)
-        const res = await fetch(`http://localhost:8000/ads/${id}`,{
+        const res = await fetch(`https://marketbazar-backend.herokuapp.com/ads/${id}`,{
             method:"GET",
             headers:{
                 Authorization:"Bearer " +  state.apiSlice.accessToken
@@ -48,7 +48,7 @@ export const postAd = createAsyncThunk(
     async (data,{getState}) => {
         const state = getState(); 
         console.log(data)
-        let res = await fetch(`http://localhost:8000/ads/add`, {
+        let res = await fetch(`https://marketbazar-backend.herokuapp.com/ads/add`, {
             method: 'POST',
             headers:{
                 Authorization:"Bearer " + state.apiSlice.accessToken,
@@ -65,7 +65,7 @@ export const createAccount = createAsyncThunk(
     "account / create",
     async (data) => {
         console.log(data)
-       let res= await fetch("http://localhost:8000/auth/signUp", {
+       let res= await fetch("https://marketbazar-backend.herokuapp.com/auth/signUp", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ export const login = createAsyncThunk(
     "account / login",
     async (data) => {
         console.log(data)
-        let res = await fetch("http://localhost:8000/auth/login", {
+        let res = await fetch("https://marketbazar-backend.herokuapp.com/auth/login", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ export const getCategories = createAsyncThunk(
     "account / categories",
     async ( data, { getState }) => {
         const state = getState(); 
-        const res = await fetch(`http://localhost:8000/category/`,{
+        const res = await fetch(`https://marketbazar-backend.herokuapp.com/category/`,{
             method:"GET",
             headers:{
                 Authorization:"Bearer " +  state.apiSlice.accessToken
