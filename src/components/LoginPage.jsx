@@ -104,6 +104,7 @@ export default function LoginPage() {
               >
                 Sign In
               </Button>
+              <div>{state.error}</div>
               <Grid container>
               
               </Grid>
@@ -111,6 +112,7 @@ export default function LoginPage() {
           </Box>
         </Grid>
       </Grid>
+      
     </ThemeProvider>
   );
 }

@@ -134,6 +134,7 @@ let mainSlice = createSlice({
         categories:[],
         adAdded:false,
         loading:false,
+        error:null
     },
     reducers: {
        setProfileAds(state,action){
@@ -149,11 +150,13 @@ let mainSlice = createSlice({
         builder.addCase(getAds.rejected, (state, action) => {
             //handle error
            console.log(action.error.message)
+           state.error = action.error.message
         })
         //View Ad
         builder.addCase(getAds.fulfilled, (state, action) => {
             console.log(action.payload)
             state.ads = action.payload
+           
         })
         builder.addCase(viewAd.pending, (state, action) => {
             //Loading screen
@@ -162,6 +165,8 @@ let mainSlice = createSlice({
         builder.addCase(viewAd.rejected, (state, action) => {
             //handle error
             console.log(action.error.message)
+            state.error = action.error.message
+            
 
         })
         builder.addCase(viewAd.fulfilled, (state, action) => {
@@ -176,6 +181,10 @@ let mainSlice = createSlice({
         })
         builder.addCase(postAd.rejected, (state, action) => {
           console.log(action.error.message)
+          state.error = action.error.message
+          setTimeout(()=>{
+            state.error=null
+           },2000)
           state.loading=false
 
         })
@@ -190,6 +199,9 @@ let mainSlice = createSlice({
         })
         builder.addCase(createAccount.rejected, (state, action) => {
             console.log(action.error.message)
+            state.error = action.error.message
+            
+
         })
         builder.addCase(createAccount.fulfilled, (state, action) => {
             
@@ -201,6 +213,9 @@ let mainSlice = createSlice({
         })
         builder.addCase(login.rejected, (state, action) => {
             console.log(action.error.message)
+            state.error = action.error.message
+            
+
 
         })
         builder.addCase(login.fulfilled, (state, action) => {
@@ -219,6 +234,9 @@ let mainSlice = createSlice({
         })
         builder.addCase(getCategories.rejected, (state, action) => {
             console.log(action.error.message)
+            state.error = action.error.message
+            
+
         })
         builder.addCase(getCategories.fulfilled, (state, action) => {
             state.categories = action.payload
