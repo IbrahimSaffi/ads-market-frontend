@@ -1,4 +1,4 @@
-.post-ad{
+.post-ad,.loading,.view-ad{
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -22,4 +22,8 @@ button{
 }
 option{
     text-transform: capitalize;
+}
+.img-view{
+    width: 200px;
+    height: 200px;
 }

@@ -132,6 +132,8 @@ let mainSlice = createSlice({
         currAd: [],
         profile:JSON.parse(localStorage.getItem("PROFILE")),
         categories:[],
+        adAdded:false,
+        loading:false,
     },
     reducers: {
        setProfileAds(state,action){
@@ -165,20 +167,21 @@ let mainSlice = createSlice({
         builder.addCase(viewAd.fulfilled, (state, action) => {
 
             state.currAd = action.payload
-            console.log(action.payload)
             state.currPage = `ad/${state.currAd._id}`
         })
         //Post Ad
         builder.addCase(postAd.pending, (state, action) => {
-            //Loading screen
+            state.loading=true
 
         })
         builder.addCase(postAd.rejected, (state, action) => {
           console.log(action.error.message)
+          state.loading=false
 
         })
         builder.addCase(postAd.fulfilled, (state, action) => {
-            //Fulfill Status
+            state.adAdded = true
+            state.loading=true
         })
         // Signup
         builder.addCase(createAccount.pending, (state, action) => {

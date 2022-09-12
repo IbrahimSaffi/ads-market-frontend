@@ -11,6 +11,7 @@ import PostAd from './components/PostAd';
 import AdsPage from './components/AdsPage';
 import { useDispatch,useSelector } from 'react-redux';
 import apiSlice, { getAds } from './slices/apiSlice';
+import Loading from './components/Loading';
 
 export default function App() {
   let apiState = useSelector(state=>state.apiSlice)
@@ -18,13 +19,30 @@ export default function App() {
   let goTo = useNavigate()
 
   useEffect(()=>{
-    if(apiState.profile===null){
+    if(apiState.accessToken===null){
       goTo("auth/login")
     }
     else{
         goTo("/")
       }
   },[])
+  useEffect(()=>{
+     if(apiState.profile!==null){
+      console.log("123")
+      goTo("/")
+     }
+  },[apiState.profile])
+  useEffect(()=>{
+    if(apiState.adAdded){
+     console.log("1235")
+     goTo("/")
+    }
+ },[apiState.adAdded])
+ useEffect(()=>{
+  if(apiState.loading){
+   goTo("/loading")
+  }
+},[apiState.loading])
   return (
     
     <div>
@@ -38,6 +56,7 @@ export default function App() {
         <Route path='post-ad' element={<PostAd/>}/>
         <Route path='profile' element={<Profile/>}/>
         <Route path='ad/:id' element={<AdPage/>}/>
+        <Route path='/loading' element={<Loading/>}/>
         </Routes>
     </div>
   )

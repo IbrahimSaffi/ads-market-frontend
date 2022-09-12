@@ -30,8 +30,8 @@ export default function LoginPage() {
         email: data.get('email'),
         password: data.get('password'),
       }))
-       dispatch(getAds(state.accessToken))
-     goTo("/")
+      //  dispatch(getAds(state.accessToken))
+    //  goTo("/")
     }
     catch (e) {
 
